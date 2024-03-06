@@ -16,7 +16,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="">
-    <title>Document</title>
+    <title>Create User</title>
 </head>
 
 <body>
@@ -27,23 +27,23 @@
                 <h1>Create new user</h1>
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">Email address</label>
-                    <form:input path="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                    <form:input path="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password</label>
-                    <form:input path="password" type="password" class="form-control" id="inputPassword">
+                    <form:input path="password" type="password" class="form-control" id="inputPassword"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputPhoneNumber" class="form-label">Phone number</label>
-                    <form:input path="phone" type="tel" class="form-control" id="inputPhoneNumber" aria-describedby="phoneHelp">
+                    <form:input path="phone" type="tel" class="form-control" id="inputPhoneNumber" aria-describedby="phoneHelp"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputFullName" class="form-label">Full Name</label>
-                    <form:input path="fullName" type="text" class="form-control" id="inputFullName" aria-describedby="phoneHelp">
+                    <form:input path="fullName" type="text" class="form-control" id="inputFullName" aria-describedby="phoneHelp"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputAddress" class="form-label">Address</label>
-                    <form:input path="address" type="text" class="form-control" id="inputAddress" aria-describedby="phoneHelp">
+                    <form:input path="address" type="text" class="form-control" id="inputAddress" aria-describedby="phoneHelp"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form:form>
