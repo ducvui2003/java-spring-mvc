@@ -1,13 +1,16 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.repository.UserRepository;
+import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
 
 import java.util.List;
@@ -16,16 +19,20 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UploadService uploadService;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @RequestMapping(value = "/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
-        return "/admin/user/table-user";
+        return "/admin/user/show";
     }
 
     @GetMapping(value = "/admin/user/create")
@@ -35,8 +42,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createUser(Model model, @ModelAttribute("newUser") User user) {
+    public String createUser(Model model,
+                             @ModelAttribute("newUser") @Valid User user,
+                             BindingResult newProductBindingResult,
+                             @RequestParam("file") MultipartFile file) {
         model.addAttribute("user", new User());
+
+        if (newProductBindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
+
+        String image = this.uploadService.handleSaveUploadFile(file, "user");
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setAvatar(image);
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
         this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
