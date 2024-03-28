@@ -49,7 +49,7 @@ public class UserController {
         model.addAttribute("user", new User());
 
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
 
         String image = this.uploadService.handleSaveUploadFile(file, "user");

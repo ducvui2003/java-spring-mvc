@@ -41,8 +41,7 @@ public class ProductController {
                                 @ModelAttribute("newProduct") @Valid Product product,
                                 BindingResult newProductBindingResult,
                                 @RequestParam("file") MultipartFile file) {
-        List<FieldError> errors = newProductBindingResult.getFieldErrors();
-//    return validate error
+
         if (newProductBindingResult.hasErrors()) {
             return "/admin/product/create";
         }
