@@ -3,6 +3,7 @@ package vn.hoidanit.laptopshop.service;
 import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
 import vn.hoidanit.laptopshop.repository.RoleRepository;
 import vn.hoidanit.laptopshop.repository.UserRepository;
 
@@ -34,11 +35,23 @@ public class UserService {
         return this.userRepository.findById(id).orElse(null);
     }
 
-    public void deleteUser(long id){
+    public void deleteUser(long id) {
         this.userRepository.deleteById(id);
     }
 
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDToToUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getLastName() + " " + registerDTO.getFirstName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
+    public boolean checkEmail(String email) {
+        return this.userRepository.existsByEmail(email);
     }
 }

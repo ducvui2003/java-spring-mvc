@@ -43,19 +43,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="user" items="${users}" varStatus="loop">
+                                        <c:forEach var="product" items="${users}" varStatus="loop">
                                             <tr>
                                                 <th scope="row">${loop.index}</th>
-                                                <td>${user.email}</td>
-                                                <td>${user.fullName}</td>
+                                                <td>${product.email}</td>
+                                                <td>${product.fullName}</td>
                                                 <td>
                                                     <div>
-                                                        <a href="/admin/user/${user.id}" class="btn btn-success">View
+                                                        <a href="/admin/user/${product.id}" class="btn btn-success">View
                                                         </a>
-                                                        <a href="/admin/user/update/${user.id}" class="btn btn-warning mx-2">
+                                                        <a href="/admin/user/update/${product.id}" class="btn btn-warning mx-2">
                                                             Update
                                                         </a>
-                                                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger">
+                                                        <a href="/admin/user/delete/${product.id}" class="btn btn-danger">
                                                             Delete
                                                         </a>
                                                     </div>

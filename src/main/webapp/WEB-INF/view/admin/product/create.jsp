@@ -35,23 +35,43 @@
                             <h1>Create new user</h1>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="inputName" class="form-label">Name</label>
-                                <form:input path="name" type="text" class="form-control" id="inputName" aria-describedby="emailHelp" />
+                                <c:set var="errorName">
+                                    <form:errors path="name" cssClass="invalid-feedback" />
+                                </c:set>
+                                <form:input path="name" type="text" class="form-control ${not empty errorName ? 'is-invalid':''}" id="inputName" aria-describedby="emailHelp" />
+                                <form:errors cssClass="invalid-feedback" path="name"  />
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="inputPrice" class="form-label">Price</label>
-                                <form:input path="price" type="password" class="form-control" id="inputPrice" />
+                                <c:set var="errorPrice">
+                                    <form:errors path="price" cssClass="invalid-feedback" />
+                                </c:set>
+                                <form:input path="price" type="text" class="form-control  ${not empty errorPrice ? 'is-invalid':''}" id="inputPrice" />
+                                <form:errors cssClass="invalid-feedback" path="price"  />
                             </div>
                             <div class="col-12 col-md-12 mb-3">
+                                <c:set var="errorDetailDesc">
+                                    <form:errors path="detailDesc" cssClass="invalid-feedback" />
+                                </c:set>
                                 <label for="inputDetailDesc" class="form-label">Detail description</label>
-                                <form:textarea path="detailDesc" class="form-control" id="inputDetailDesc" aria-describedby="phoneHelp" />
+                                <form:textarea path="detailDesc" class="form-control ${not empty errorDetailDesc ? 'is-invalid':''}" id="inputDetailDesc" aria-describedby="phoneHelp" />
+                                <form:errors cssClass="invalid-feedback" path="detailDesc"  />
                             </div>
                             <div class="col-12 col-md-6 mb-3">
+                                <c:set var="errorShortDesc">
+                                    <form:errors path="shortDesc" cssClass="invalid-feedback" />
+                                </c:set>
                                 <label for="inputShortDesc" class="form-label">Short description</label>
-                                <form:input path="shortDesc" type="text" class="form-control" id="inputShortDesc" aria-describedby="phoneHelp" />
+                                <form:input path="shortDesc" type="text" class="form-control ${not empty errorShortDesc ? 'is-invalid':''}" id="inputShortDesc" aria-describedby="phoneHelp" />
+                                <form:errors cssClass="invalid-feedback" path="shortDesc"  />
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="inputQuantity" class="form-label">Quantity</label>
-                                <form:input path="quantity" type="text" class="form-control" id="inputQuantity" aria-describedby="phoneHelp" />
+                                <c:set var="errorQuantity">
+                                    <form:errors path="quantity" cssClass="invalid-feedback" />
+                                </c:set>
+                                <form:input path="quantity" type="text" class="form-control ${not empty errorQuantity ? 'is-invalid':''}" id="inputQuantity" aria-describedby="phoneHelp" />
+                                <form:errors cssClass="invalid-feedback" path="quantity"  />
                             </div>
 
                             <div class="col-12 col-md-6 mb-3">

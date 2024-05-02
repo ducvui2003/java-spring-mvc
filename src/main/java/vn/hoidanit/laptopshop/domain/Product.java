@@ -1,8 +1,7 @@
 package vn.hoidanit.laptopshop.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,23 +15,22 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
-    @Min(value = 8, message = "Name must be at least 8 characters")
+    @NotBlank
+    @Size(min = 8, message = "Name must be at least 8 characters")
     private String name;
     @NotNull
+    @DecimalMin(value = "0.0", message = "Price must be greater than 0.0", inclusive = false)
     private double price;
-    @NotNull
     private String image;
     @NotNull
+    @NotEmpty(message = "Detail description is required")
     private String detailDesc;
     @NotNull
+    @NotEmpty(message = "Short description is required")
     private String shortDesc;
-    @NotNull
     private long quantity;
-    @NotNull
     private long sold;
-    @NotNull
     private String factory;
-    @NotNull
     private String target;
 
     @OneToMany(mappedBy = "product")

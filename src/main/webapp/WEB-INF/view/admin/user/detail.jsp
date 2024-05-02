@@ -34,16 +34,16 @@
                         <div class="offset-2 col-8">
                             <h1 class="h2">User ${user.id}</h1>
                             <hr/>
-                            <c:set var="user" value="${user}"/>
+                            <c:set var="product" value="${user}"/>
                             <div class="card">
                                 <div class="card-header">
-                                    Info user ${user.id}
+                                    Info user ${product.id}
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Email ${user.email}</li>
-                                    <li class="list-group-item">Full name: ${user.fullName}</li>
-                                    <li class="list-group-item">Address: ${user.address}</li>
+                                    <li class="list-group-item">ID: ${product.id}</li>
+                                    <li class="list-group-item">Email ${product.email}</li>
+                                    <li class="list-group-item">Full name: ${product.fullName}</li>
+                                    <li class="list-group-item">Address: ${product.address}</li>
                                 </ul>
                             </div>
                             <a href="/admin/user" class="btn btn-primary mt-4">Back</a>
