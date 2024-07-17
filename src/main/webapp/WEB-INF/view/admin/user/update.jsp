@@ -10,7 +10,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
-        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="<c:url value="/css/styles.css"/>" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -21,7 +21,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
+                        <ol class="breadcrumb mb-4">z
                             <li class="breadcrumb-item">
                                 <a href="/admin">Dashboard</a>
                             </li>

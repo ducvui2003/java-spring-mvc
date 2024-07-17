@@ -7,10 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
@@ -21,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/admin/product")
 public class ProductController {
     private final ProductService userService;
     private final UploadService uploadService;
@@ -32,8 +30,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/admin/product")
-    public String getProductPage(Model model, @RequestParam(name = "page")Optional<String> pageOptional) {
+    //Datatable
+    @GetMapping()
+    public String getProductPage(Model model, @RequestParam(name = "page") Optional<String> pageOptional) {
         int page = pageOptional.map(Integer::parseInt).orElse(1);
         Pageable pageable = PageRequest.of(page - 1, 2);
         Page<Product> products = this.productService.fetchProducts(pageable);
@@ -41,16 +40,25 @@ public class ProductController {
         model.addAttribute("products", listProducts);
         model.addAttribute("totalPages", products.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "/admin/product/show";
+        return "/admin/product/datatable";
     }
 
-    @GetMapping("/admin/product/create")
+    //  View
+    @GetMapping("/{id}")
+    public String getViewProductPage(Model model, @PathVariable long id) {
+        Product product = this.userService.getProductById(id);
+        model.addAttribute("product", product);
+        return "/admin/product/view";
+    }
+
+    //Create
+    @GetMapping("/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
         return "/admin/product/create";
     }
 
-    @PostMapping("/admin/product/create")
+    @PostMapping("/create")
     public String createProduct(Model model,
                                 @ModelAttribute("newProduct") @Valid Product product,
                                 BindingResult newProductBindingResult,
@@ -65,6 +73,40 @@ public class ProductController {
         this.userService.handleSaveProduct(product);
         model.addAttribute("product", new User());
 
+        return "redirect:/admin/product";
+    }
+
+
+    //    Update
+    @GetMapping("/update/{id}")
+    public String getUpdateProductPage(Model model, @PathVariable long id) {
+        Product product = this.userService.getProductById(id);
+        model.addAttribute("product", product);
+        return "/admin/product/update";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(Model model,
+                                @ModelAttribute("product") @Valid Product product,
+                                BindingResult newProductBindingResult,
+                                @RequestParam("file") MultipartFile file) {
+
+        if (newProductBindingResult.hasErrors()) {
+            return "/admin/product/update";
+        }
+        Product productExist = productService.getProductById(product.getId());
+        if (!file.isEmpty()) {
+            String image = this.uploadService.handleSaveUploadFile(file, "product");
+            productExist.setImage(image);
+        }
+        productExist.setName(product.getName());
+        productExist.setPrice(product.getPrice());
+        productExist.setDetailDesc(product.getDetailDesc());
+        productExist.setShortDesc(product.getShortDesc());
+        productExist.setQuantity(product.getQuantity());
+        productExist.setTarget(product.getTarget());
+        productExist.setFactory(product.getFactory());
+        productService.handleSaveProduct(productExist);
         return "redirect:/admin/product";
     }
 }

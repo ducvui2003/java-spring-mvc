@@ -23,7 +23,8 @@ public class Product {
     private double price;
     private String image;
     @NotNull
-    @NotEmpty(message = "Detail description is required")
+    @NotEmpty(message = "detailDesc không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
     @NotNull
     @NotEmpty(message = "Short description is required")

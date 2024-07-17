@@ -22,7 +22,7 @@
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item">
-                                <a href="/admin">Dashboard</a>
+                                <a href="<c:url value="/admin"/>">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active">Product</li>
                         </ol>
@@ -30,7 +30,7 @@
                             <div class="col-12">
                                 <div class="d-flex justify-content-between mt-4">
                                     <h1 class="h2">Table Products</h1>
-                                    <a href="/admin/product/create" class="btn btn-primary text-center">Create a
+                                    <a href="<c:url value="/admin/product/create"/>" class="btn btn-primary text-center">Create a
                                                                                                         product
                                     </a>
                                 </div>
@@ -98,6 +98,5 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/js/scripts.js"></script>
     </body>
 </html>

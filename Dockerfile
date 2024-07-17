@@ -13,4 +13,4 @@ COPY --from=build /ducvui/spring-mvc/target/*.war /ducvui/spring-mvc/app.war
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/ducvui/spring-mvc/app.war"]
+ENTRYPOINT ["java", "-jar", "/ducvui/spring-mvc/app.war", "/ducvui/spring-mvc/app.war", "--spring.profiles.active=prod"]

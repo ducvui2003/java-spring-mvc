@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller.client;
+package vn.hoidanit.laptopshop.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
